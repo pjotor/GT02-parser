@@ -121,20 +121,20 @@ function parseCommunication(resp) {
 	});
 	
 	data.information.status = {
-		located:	(data.information.statusHex[0] === 1),
-		latitude:	(data.information.statusHex[1] === 1)? 1:-1,
-		longitude:	(data.information.statusHex[2] === 1)? 1:-1,
-		charged:	(data.information.statusHex[3] === 1)
+		located:	(data.information.statusHex[0] === "01"),
+		latitude:	(data.information.statusHex[1] === "01")? 1:-1,
+		longitude:	(data.information.statusHex[2] === "01")? 1:-1,
+		charged:	(data.information.statusHex[3] === "01")
 	}
 	delete data.information.statusHex;	
-		
+
 	["latitude","longitude"].forEach(function(n,i){
 		data.information[n] = convertHexToGPS(
 			data.information[n], 
 			data.information.status[n]
 		);
 	});
-		
+
 	return data;
 }
 
